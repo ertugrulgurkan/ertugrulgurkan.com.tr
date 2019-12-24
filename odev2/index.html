@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <img class="logo" src="fblogo.png" alt="fb">
+    <div class="pull-right">
+        <p id=corner>Ertuğrul Ayvaz Gürkan
+            <br/>1306161416
+            <br/>
+            <span id="craftedcount">Crafted count: 0</span>
+            <br/>
+            <span id="clickcount">Clicked count: 0</span>
+        </p>
+    </div>
+
+
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+    body {
+        line-height: 1;
+        font-family: lato, ubuntu, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+        font-size: 19px;
+        background-color: #FEFEFE;
+        color: #04143A;
+        transition: 2s;
+
+    }
+
+    .logo {
+        z-index: 0;
+    }
+</style>
+<script>
+    var e = document.getElementById("craftedcount");
+    var counter = 0;
+    var element = document.getElementById("clickcount");
+    var count = 0;
+    $(document).mousemove(function (e) {
+        $('.logo').offset({
+            left: e.pageX,
+            top: e.pageY
+        });
+    });
+    window.setInterval(function () {
+        for (var i = 1; i <= 4; i++) {
+            var randomColor = '#' + ('000000' + Math.floor(Math.random() * 16777215).toString(16)).slice(-6);
+            var x = Math.max(0, Math.min(85, Math.ceil(Math.random() * 100)));
+            var y = Math.max(0, Math.min(85, Math.ceil(Math.random() * 100)));
+            $('<div class="box" />').css({
+                position: 'absolute',
+                width: '60px',
+                height: '60px',
+                top: y + '%',
+                left: x + '%',
+                'background-color': randomColor
+            }).appendTo('body');
+            counter = counter + 1;
+            e.innerHTML = "Crafted count: " + counter;
+        }
+        $(document).ready(function () {
+            $(".box").click(function () {
+                var $this = $(this);
+                if (!$this.data('clicked')) {
+                    $this.data('clicked', true);
+                    count += 1;
+                    element.innerHTML = "Clicked count: " + count;
+                }
+                $(this).fadeOut(500);
+            });
+        });
+        var randomC = '#' + ('000000' + Math.floor(Math.random() * 16777215).toString(16)).slice(-6);
+        $('body').css({
+            'background-color': randomC,
+        });
+    }, 3000);
+
+</script>
+
+</html>
